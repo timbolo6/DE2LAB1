@@ -5,9 +5,12 @@ client = pulsar.Client('pulsar://localhost:6650')
 
 # Create a producer on the topic that consumer can subscribe to
 producer = client.create_producer('DEtopic')
+
+data = 'I want to be capatilized'
+
 # Send a message to consumer
-for i in range(10):
-	producer.send(('Welcome to Data Engineering Course, Tim! '+str(i)).encode('utf-8'))
+for word in data.split() :
+	producer.send((word).encode('utf-8'))
 # Destroy pulsar client
 client.close()
 

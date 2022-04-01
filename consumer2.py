@@ -12,22 +12,22 @@ lastMsg_time = time.time()
 
 while time.time() < lastMsg_time + timeout:
 # Display message received from producer
-	msg = consumer.receive()
-	try:
-		# Data streamin processin
+        msg = consumer.receive()
+        try:
+                print("Received message : '%s'" % msg.data())
+                # Acknowledge for receiving the message
+                consumer.acknowledge(msg)
+
+                # Data streamin processin
                 word = msg.data()
                 capWord = word.upper()
                 data = data +  '' + capWord
                 lastMsg_time = time.time()
-		print("Received message : '%s'" % msg.data())
-        	# Acknowledge for receiving the message
-        	consumer.acknowledge(msg)
-	except:
-        	consumer.negative_acknowledge(msg)
+        except:
+            consumer.negative_acknowledge(msg)
+
 
 print("Final message : '%s'" % data)
 
 # Destroy pulsar clien
 client.close()
-
-

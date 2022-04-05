@@ -10,6 +10,7 @@ data = 'I want to be capatilized'
 
 # Send a message to consumer
 for word in data.split() :
+	print(word)
 	producer.send((word).encode('utf-8'))
 # Destroy pulsar client
 client.close()
